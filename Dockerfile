@@ -10,6 +10,10 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Create a non-root user for execution safety
+RUN useradd -m runner
+USER runner
+
 # Copy only the files needed for installing deps
 COPY package.json tsconfig.json ./
 
